@@ -1,7 +1,7 @@
 # Rack::Revision
 
 Rack::Revision is a quick drop-in component to enable code revision tracking. 
-It adds 'X-Revision' header with the code revision from capistrano's REVISION file.
+It adds `X-Revision` header with the code revision from capistrano's REVISION file.
 
 ## Installation
 
@@ -14,15 +14,22 @@ gem install rack-revision
 ## Usage
 
 Rack::Revision is implemented as a piece of Rack middleware and can be used with
-any Rack-based application. If you have a ```configu.ru``` rackup file you can 
+any Rack-based application. If you have a `configu.ru` rackup file you can 
 drop the following:
 
 ```ruby
 require 'rack/revision'
 
 use Rack::Revision
+
 run YourApp
 ```
+
+Configuration options:
+
+- `:header` - Set a custom revision header. Default: `X-Revision`
+- `:filename` - Set a filename with revision data. Default: `REVISION`
+- `:default` - Override default `UNDEFINED` revision value
 
 ## License
 

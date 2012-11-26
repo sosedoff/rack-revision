@@ -6,15 +6,21 @@ module Rack
 
     File = ::File
     @@revision = nil
- 
-    def initialize(app)
-      @app   = app
-      @file  = File.join(Dir.pwd, 'REVISION')
+
+    def initialize(app, options={})
+      @options = {
+        :header   => options[:header]   || 'X-Revision',
+        :filename => options[:filename] || 'REVISION',
+        :default  => options[:default]  || 'UNDEFINED' 
+      }
+
+      @app = app
+      @file = File.join(Dir.pwd, @options[:filename])
     end
  
     def call(env)
       status, headers, body = @app.call(env)
-      headers['X-Revision'] = revision
+      headers[@options[:header]] = revision
       [status, headers, body]
     end
  
@@ -25,7 +31,7 @@ module Rack
     end
  
     def read_revision
-      File.exists?(@file) ? File.read(@file).strip : 'Undefined'
+      File.exists?(@file) ? File.read(@file).strip : @options[:default]
     end
   end
 end
