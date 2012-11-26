@@ -1,10 +1,10 @@
-require File.expand_path('../lib/rack/revision', __FILE__)
+require File.expand_path('../lib/rack/revision/version', __FILE__)
 
 Gem::Specification.new do |s|
   s.name        = "rack-revision"
-  s.version     = Rack::Revision::VERSION.dup
-  s.summary     = "Code revision rack middleware"
-  s.description = "Code revision rack middleware"
+  s.version     = Rack::Revision::VERSION
+  s.summary     = "Code ravision rack middleware"
+  s.description = "Adds an extra X-REVISION header with source code revision string (git, svn, etc)"
   s.homepage    = "http://github.com/sosedoff/rack-revision"
   s.authors     = ["Dan Sosedoff"]
   s.email       = ["dan.sosedoff@gmail.com"]

@@ -2,8 +2,6 @@ require 'rack'
 
 module Rack
   class Revision
-    VERSION = '0.1.0'
-
     File = ::File
     @@revision = nil
 
