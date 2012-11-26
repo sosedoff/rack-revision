@@ -23,6 +23,10 @@ module Rack
       headers[@options[:header]] = revision
       [status, headers, body]
     end
+
+    def reset_revision
+      @@revision = nil
+    end
  
     protected
  

@@ -31,6 +31,14 @@ Configuration options:
 - `:filename` - Set a filename with revision data. Default: `REVISION`
 - `:default` - Override default `UNDEFINED` revision value
 
+## Test
+
+Execute test suite:
+
+```
+rake test
+```
+
 ## License
 
 Copyright (c) 2012 Dan Sosedoff.
