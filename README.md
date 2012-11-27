@@ -11,25 +11,40 @@ From rubygems:
 gem install rack-revision
 ```
 
+Or install with bundler:
+
+```
+gem 'rack-revision'
+```
+
+And run `bundle install`
+
 ## Usage
 
 Rack::Revision is implemented as a piece of Rack middleware and can be used with
-any Rack-based application. If you have a `configu.ru` rackup file you can 
-drop the following:
+any Rack-based application. If you have a `config.ru` rackup file you can 
+drop the following snippet (for sinatra app):
 
 ```ruby
 require 'rack/revision'
 
+# Basic example
 use Rack::Revision
 
-run YourApp
+# With custom revision header
+use Rack::Revision, :header => 'X-CODE-VERSION'
+
+# With custom filename and default value
+use Rack::Revision, :filename => '.version', :default => 'n/a'
+
+run Sinatra::Application
 ```
 
-Configuration options:
+Available options:
 
-- `:header` - Set a custom revision header. Default: `X-Revision`
-- `:filename` - Set a filename with revision data. Default: `REVISION`
-- `:default` - Override default `UNDEFINED` revision value
+- `:header`   - Sets a custom revision header. Default: `X-Revision`
+- `:filename` - Sets a filename with revision data. Default: `REVISION`
+- `:default`  - Sets a revision value if file does not exist. Default: UNDEFINED
 
 ## Test
 
