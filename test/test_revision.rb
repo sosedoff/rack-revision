@@ -78,10 +78,21 @@ class TestRevision < Test::Unit::TestCase
     assert_not_nil last_response.headers['FOOBAR']
   end
 
-  def test_default_filename
+  def test_custom_filename
     File.open('./test/tmp/REVISION', 'w') { |f| f.write('qwe123') }
 
     self.app = Rack::Revision.new(default_app, :filename => './test/tmp/REVISION')
+    self.app.reset_revision
+
+    get app_url
+    assert_equal 'qwe123', last_response.headers['X-Revision']
+  end
+
+  def test_custom_filename_starting_from_root
+    File.open('./test/tmp/REVISION', 'w') { |f| f.write('qwe123') }
+    filename = File.expand_path("./test/tmp/REVISION")
+
+    self.app = Rack::Revision.new(default_app, :filename => filename)
     self.app.reset_revision
 
     get app_url

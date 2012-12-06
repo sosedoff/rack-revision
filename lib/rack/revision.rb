@@ -13,7 +13,6 @@ module Rack
       }
 
       @app = app
-      @file = File.join(Dir.pwd, @options[:filename])
     end
  
     def call(env)
@@ -33,7 +32,11 @@ module Rack
     end
  
     def read_revision
-      File.exists?(@file) ? File.read(@file).strip : @options[:default]
+      File.exists?(detected_filename) ? File.read(detected_filename).strip : @options[:default]
+    end
+
+    def detected_filename
+      @file ||= (@options[:filename] =~ /\A\// ? @options[:filename] : File.join(Dir.pwd, @options[:filename]))
     end
   end
 end
