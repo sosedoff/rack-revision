@@ -46,6 +46,15 @@ class TestRevision < Test::Unit::TestCase
     assert_not_nil last_response.headers['X-Revision']
   end
 
+  def test_blank
+    self.app = Rack::Revision.new(default_app, :header => false)
+    self.app.reset_revision
+    get app_url
+
+    assert_nil last_response.headers['X-REVISION']
+    assert_nil last_response.headers['X-Revision']
+  end
+
   def test_default_value
     self.app.reset_revision
     get app_url

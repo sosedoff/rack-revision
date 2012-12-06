@@ -7,7 +7,7 @@ module Rack
 
     def initialize(app, options={})
       @options = {
-        :header   => options[:header]   || 'X-Revision',
+        :header   => options[:header].nil? ? 'X-Revision' : options[:header],
         :filename => options[:filename] || 'REVISION',
         :default  => options[:default]  || 'UNDEFINED' 
       }
@@ -18,7 +18,7 @@ module Rack
  
     def call(env)
       status, headers, body = @app.call(env)
-      headers[@options[:header]] = revision
+      headers[@options[:header]] = revision if @options[:header]
       [status, headers, body]
     end
 
