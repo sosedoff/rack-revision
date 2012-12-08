@@ -9,13 +9,15 @@ module Rack
       @options = {
         :header   => options[:header].nil? ? 'X-Revision' : options[:header],
         :filename => options[:filename] || 'REVISION',
-        :default  => options[:default]  || 'UNDEFINED' 
+        :default  => options[:default]  || 'UNDEFINED',
+        :rack_env => options[:rack_env].nil? ? 'rack.app_revision' : options[:rack_env]
       }
 
       @app = app
     end
  
     def call(env)
+      env[@options[:rack_env]] = revision if @options[:rack_env]
       status, headers, body = @app.call(env)
       headers[@options[:header]] = revision if @options[:header]
       [status, headers, body]

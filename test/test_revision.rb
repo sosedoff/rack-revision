@@ -98,4 +98,28 @@ class TestRevision < Test::Unit::TestCase
     get app_url
     assert_equal 'qwe123', last_response.headers['X-Revision']
   end
+
+  def test_env_is_present
+    self.app.reset_revision
+    get app_url
+
+    assert_not_nil last_request.env['rack.app_revision']
+  end
+
+  def test_custom_env
+    self.app = Rack::Revision.new(default_app, :rack_env => 'rack.custom_env')
+    self.app.reset_revision
+    get app_url
+
+    assert_nil last_request.env['rack.app_revision']
+    assert_not_nil last_request.env['rack.custom_env']
+  end
+
+  def test_disable_env
+    self.app = Rack::Revision.new(default_app, :rack_env => false)
+    self.app.reset_revision
+    get app_url
+
+    assert_nil last_request.env['rack.app_revision']
+  end
 end
