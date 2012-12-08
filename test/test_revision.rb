@@ -46,6 +46,15 @@ class TestRevision < Test::Unit::TestCase
     assert_not_nil last_response.headers['X-Revision']
   end
 
+  def test_blank
+    self.app = Rack::Revision.new(default_app, :header => false)
+    self.app.reset_revision
+    get app_url
+
+    assert_nil last_response.headers['X-REVISION']
+    assert_nil last_response.headers['X-Revision']
+  end
+
   def test_default_value
     self.app.reset_revision
     get app_url
@@ -69,7 +78,7 @@ class TestRevision < Test::Unit::TestCase
     assert_not_nil last_response.headers['FOOBAR']
   end
 
-  def test_default_filename
+  def test_custom_filename
     File.open('./test/tmp/REVISION', 'w') { |f| f.write('qwe123') }
 
     self.app = Rack::Revision.new(default_app, :filename => './test/tmp/REVISION')
@@ -77,5 +86,40 @@ class TestRevision < Test::Unit::TestCase
 
     get app_url
     assert_equal 'qwe123', last_response.headers['X-Revision']
+  end
+
+  def test_custom_filename_starting_from_root
+    File.open('./test/tmp/REVISION', 'w') { |f| f.write('qwe123') }
+    filename = File.expand_path("./test/tmp/REVISION")
+
+    self.app = Rack::Revision.new(default_app, :filename => filename)
+    self.app.reset_revision
+
+    get app_url
+    assert_equal 'qwe123', last_response.headers['X-Revision']
+  end
+
+  def test_env_is_present
+    self.app.reset_revision
+    get app_url
+
+    assert_not_nil last_request.env['rack.app_revision']
+  end
+
+  def test_custom_env
+    self.app = Rack::Revision.new(default_app, :rack_env => 'rack.custom_env')
+    self.app.reset_revision
+    get app_url
+
+    assert_nil last_request.env['rack.app_revision']
+    assert_not_nil last_request.env['rack.custom_env']
+  end
+
+  def test_disable_env
+    self.app = Rack::Revision.new(default_app, :rack_env => false)
+    self.app.reset_revision
+    get app_url
+
+    assert_nil last_request.env['rack.app_revision']
   end
 end
