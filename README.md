@@ -45,6 +45,7 @@ Available options:
 - `:header`   - Sets a custom revision header. Default: `X-Revision`
 - `:filename` - Sets a filename with revision data. Default: `REVISION`
 - `:default`  - Sets a revision value if file does not exist. Default: UNDEFINED
+- `:rack_env` - Sets a revision value to Rack's `env` hash. Default: `env['rack.app_revision']`
 
 ## Test
 

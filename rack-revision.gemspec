@@ -8,9 +8,10 @@ Gem::Specification.new do |s|
   s.homepage    = "http://github.com/sosedoff/rack-revision"
   s.authors     = ["Dan Sosedoff"]
   s.email       = ["dan.sosedoff@gmail.com"]
-    
+
   s.add_runtime_dependency 'rack', '>= 1.0'
-  
+  s.add_development_dependency 'rack-test', '>= 0'
+
   s.files              = `git ls-files`.split("\n")
   s.test_files         = `git ls-files -- {test,spec,features}/*`.split("\n")
   s.executables        = `git ls-files -- bin/*`.split("\n").map{|f| File.basename(f)}
