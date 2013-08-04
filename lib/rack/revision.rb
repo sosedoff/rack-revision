@@ -6,12 +6,7 @@ module Rack
     @@revision = nil
 
     def initialize(app, options={})
-      @options = {
-        :header   => options[:header].nil? ? 'X-Revision' : options[:header],
-        :filename => options[:filename] || 'REVISION',
-        :default  => options[:default]  || 'UNDEFINED',
-        :rack_env => options[:rack_env].nil? ? 'rack.app_revision' : options[:rack_env]
-      }
+      initialize_options(options)
 
       @app = app
     end
@@ -39,6 +34,15 @@ module Rack
 
     def detected_filename
       @file ||= (@options[:filename] =~ /\A\// ? @options[:filename] : File.join(Dir.pwd, @options[:filename]))
+    end
+
+    def initialize_options(options)
+      @options = {
+        :header   => options[:header].nil? ? 'X-Revision' : options[:header],
+        :filename => options[:filename] || 'REVISION',
+        :default  => options[:default]  || 'UNDEFINED',
+        :rack_env => options[:rack_env].nil? ? 'rack.app_revision' : options[:rack_env]
+      }
     end
   end
 end
