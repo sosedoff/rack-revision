@@ -7,19 +7,17 @@ It adds `X-Revision` header with the code revision from capistrano's REVISION fi
 
 ## Installation
 
-From rubygems:
+Add dependency to your Gemfile:
 
 ```
-gem install rack-revision
+gem "rack-revision"
 ```
 
-Or install with bundler:
+Install gem:
 
 ```
-gem 'rack-revision'
+bundle install
 ```
-
-And run `bundle install`
 
 ## Usage
 
@@ -28,17 +26,18 @@ any Rack-based application. If you have a `config.ru` rackup file you can
 drop the following snippet (for sinatra app):
 
 ```ruby
-require 'rack/revision'
+require "rack/revision"
 
 # Basic example
 use Rack::Revision
 
 # With custom revision header
-use Rack::Revision, :header => 'X-CODE-VERSION'
+use Rack::Revision, :header => "X-CODE-VERSION"
 
 # With custom filename and default value
-use Rack::Revision, :filename => '.version', :default => 'n/a'
+use Rack::Revision, :filename => ".version", :default => "n/a"
 
+# Execute application
 run Sinatra::Application
 ```
 
