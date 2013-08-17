@@ -12,9 +12,16 @@ module Rack
     end
  
     def call(env)
-      env[@options[:rack_env]] = revision if @options[:rack_env]
+      if @options[:rack_env]
+        env[@options[:rack_env]] = revision
+      end
+
       status, headers, body = @app.call(env)
-      headers[@options[:header]] = revision if @options[:header]
+
+      if @options[:header]
+        headers[@options[:header]] = revision
+      end
+
       [status, headers, body]
     end
 
