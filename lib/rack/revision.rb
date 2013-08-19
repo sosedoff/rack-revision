@@ -49,10 +49,10 @@ module Rack
 
     def initialize_options(options)
       @options = {
-        :header   => options[:header].nil? ? 'X-Revision' : options[:header],
-        :filename => options[:filename] || 'REVISION',
-        :default  => options[:default]  || 'UNDEFINED',
-        :rack_env => options[:rack_env].nil? ? 'rack.app_revision' : options[:rack_env]
+        :header   => options[:header].nil? ? "X-Revision" : options[:header],
+        :rack_env => options[:rack_env].nil? ? "rack.app_revision" : options[:rack_env],
+        :filename => options[:filename] || "REVISION",
+        :default  => options[:default]  || "UNDEFINED"
       }
     end
   end
