@@ -36,7 +36,11 @@ module Rack
     end
  
     def read_revision
-      File.exists?(detected_filename) ? File.read(detected_filename).strip : @options[:default]
+      if File.exists?(detected_filename)
+        File.read(detected_filename).strip
+      else
+        @options[:default]
+      end
     end
 
     def detected_filename
