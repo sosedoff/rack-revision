@@ -10,7 +10,10 @@ Gem::Specification.new do |s|
   s.email       = ["dan.sosedoff@gmail.com"]
 
   s.add_runtime_dependency 'rack', '>= 1.0'
+
+  s.add_development_dependency 'rake',      '~> 10.0'
   s.add_development_dependency 'rack-test', '>= 0'
+  s.add_development_dependency 'simplecov', '~> 0.8'
 
   s.files              = `git ls-files`.split("\n")
   s.test_files         = `git ls-files -- {test,spec,features}/*`.split("\n")
