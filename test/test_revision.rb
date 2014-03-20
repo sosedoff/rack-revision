@@ -1,3 +1,6 @@
+require "simplecov"
+SimpleCov.start
+
 require 'test/unit'
 require 'rack/test'
 require 'rack/revision'
