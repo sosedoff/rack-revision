@@ -48,6 +48,30 @@ Available options:
 - `:default`  - Sets a revision value if file does not exist. Default: UNDEFINED
 - `:rack_env` - Sets a revision value to Rack's `env` hash. Default: `env['rack.app_revision']`
 
+## Example
+
+To see what the header might look like, run a curl command:
+
+```
+curl -i -X HEAD "http://yourdomain.com"
+```
+
+Example response:
+
+```
+HTTP/1.1 200 OK
+Server: nginx/1.4.4
+Content-Type: text/html; charset=utf-8
+Connection: keep-alive
+X-UA-Compatible: IE=Edge,chrome=1
+ETag: "5e622b6dab40d3cb8ad8a4bd51627a59"
+Cache-Control: max-age=0, private, must-revalidate
+X-Request-Id: ae07ad30bd857788bebfa1421576f96e
+X-Runtime: 0.022007
+X-Rack-Cache: miss
+X-Revision: a3de2043d4cea6182e511c9c73f57f4f1e0dbc2b
+```
+
 ## Test
 
 Execute test suite:
