@@ -4,6 +4,7 @@ Rack::Revision is a quick drop-in component to enable code revision tracking.
 It adds `X-Revision` header with the code revision from capistrano's REVISION file.
 
 [![Build Status](https://travis-ci.org/sosedoff/rack-revision.png?branch=master)](https://travis-ci.org/sosedoff/rack-revision)
+[![Gem Version](https://badge.fury.io/rb/rack-revision.png)](http://badge.fury.io/rb/rack-revision)
 
 ## Installation
 
