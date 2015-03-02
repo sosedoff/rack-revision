@@ -85,4 +85,4 @@ rake test
 
 The MIT License
 
-Copyright (c) 2012-2014 Dan Sosedoff <dan.sosedoff@gmail.com>
+Copyright (c) 2012-2015 Dan Sosedoff <dan.sosedoff@gmail.com>
