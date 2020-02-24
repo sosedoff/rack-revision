@@ -125,4 +125,23 @@ class TestRevision < Test::Unit::TestCase
 
     assert_nil last_request.env["rack.app_revision"]
   end
+
+  def test_from_env_var
+    self.app = Rack::Revision.new(default_app)
+    self.app.reset_revision
+
+    ENV["RACK_REVISION"] = "revision"
+    get app_url
+    assert_equal "revision", last_response.headers["X-Revision"]
+  end
+
+  def test_from_custom_env_var
+    self.app = Rack::Revision.new(default_app, env_var: "SERVICE_REVISION")
+    self.app.reset_revision
+
+    ENV["RACK_REVISION"] = "bad"
+    ENV["SERVICE_REVISION"] = "good"
+    get app_url
+    assert_equal "good", last_response.headers["X-Revision"]
+  end
 end

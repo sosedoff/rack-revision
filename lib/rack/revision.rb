@@ -32,15 +32,21 @@ module Rack
     protected
  
     def revision
-      @@revision ||= read_revision
+      @@revision ||= (fetch_from_env || fetch_from_file || fetch_default)
     end
  
-    def read_revision
-      if File.exists?(detected_filename)
-        File.read(detected_filename).strip
-      else
-        @options[:default]
+    def fetch_from_env
+      ENV[@options[:env_var]]
+    end
+
+    def fetch_from_file
+      if ::File.exists?(detected_filename)
+        ::File.read(detected_filename).strip
       end
+    end
+
+    def fetch_default
+      @options[:default]
     end
 
     def detected_filename
@@ -51,6 +57,7 @@ module Rack
       @options = {
         :header   => options[:header].nil? ? "X-Revision" : options[:header],
         :rack_env => options[:rack_env].nil? ? "rack.app_revision" : options[:rack_env],
+        :env_var  => options[:env_var]  || "RACK_REVISION",
         :filename => options[:filename] || "REVISION",
         :default  => options[:default]  || "UNDEFINED"
       }

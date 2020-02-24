@@ -44,10 +44,11 @@ run Sinatra::Application
 
 Available options:
 
-- `:header`   - Sets a custom revision header. Default: `X-Revision`
-- `:filename` - Sets a filename with revision data. Default: `REVISION`
-- `:default`  - Sets a revision value if file does not exist. Default: UNDEFINED
-- `:rack_env` - Sets a revision value to Rack's `env` hash. Default: `env['rack.app_revision']`
+- `:header`   - Changes revision header name. Default: `X-Revision`
+- `:filename` - Changes the revision filename. Default: `REVISION`
+- `:rack_env` - Changes Rack environment key for revision. Default: `env['rack.app_revision']`
+- `:env_var`  - Sets revision value from an environment variable. Default: `RACK_REVISION`
+- `:default`  - Sets revision value if env var or a file with revision does not exist. Default: `UNDEFINED`
 
 ## Example
 
