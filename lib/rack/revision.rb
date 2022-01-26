@@ -40,7 +40,7 @@ module Rack
     end
 
     def fetch_from_file
-      if ::File.exists?(detected_filename)
+      if ::File.exist?(detected_filename)
         ::File.read(detected_filename).strip
       end
     end
