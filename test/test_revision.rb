@@ -106,10 +106,13 @@ class TestRevision < Test::Unit::TestCase
     File.write("./test/tmp/REVISION", "example")
 
     Dir.chdir("./test/tmp") do
-      self.app = Rack::Revision.new(default_app)
       self.app.reset_revision
 
+      get app_url
+      assert_equal "example", last_response.headers["X-Revision"]
+
       FileUtils.rm_rf("../tmp")
+      self.app.reset_revision
 
       get app_url
       assert_equal "UNDEFINED", last_response.headers["X-Revision"]
