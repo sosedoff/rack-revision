@@ -10,7 +10,7 @@ module Rack
 
       @app = app
     end
- 
+
     def call(env)
       if @options[:rack_env]
         env[@options[:rack_env]] = revision
@@ -28,13 +28,13 @@ module Rack
     def reset_revision
       @@revision = nil
     end
- 
+
     protected
- 
+
     def revision
       @@revision ||= (fetch_from_env || fetch_from_file || fetch_default)
     end
- 
+
     def fetch_from_env
       ENV[@options[:env_var]]
     end
