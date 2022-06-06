@@ -1,6 +1,6 @@
 # Rack::Revision
 
-Rack::Revision is a quick drop-in component to enable code revision tracking. 
+Rack::Revision is a quick drop-in component to enable code revision tracking.
 It adds `X-Revision` header with the code revision from capistrano's REVISION file.
 
 [![Build](https://github.com/sosedoff/rack-revision/actions/workflows/test.yml/badge.svg)](https://github.com/sosedoff/rack-revision/actions/workflows/test.yml)
@@ -23,7 +23,7 @@ bundle install
 ## Usage
 
 Rack::Revision is implemented as a piece of Rack middleware and can be used with
-any Rack-based application. If you have a `config.ru` rackup file you can 
+any Rack-based application. If you have a `config.ru` rackup file you can
 drop the following snippet (for sinatra app):
 
 ```ruby
@@ -44,11 +44,11 @@ run Sinatra::Application
 
 Available options:
 
-- `:header`   - Changes revision header name. Default: `X-Revision`
+- `:header` - Changes revision header name. Default: `X-Revision`
 - `:filename` - Changes the revision filename. Default: `REVISION`
 - `:rack_env` - Changes Rack environment key for revision. Default: `env['rack.app_revision']`
-- `:env_var`  - Sets revision value from an environment variable. Default: `RACK_REVISION`
-- `:default`  - Sets revision value if env var or a file with revision does not exist. Default: `UNDEFINED`
+- `:env_var` - Sets revision value from an environment variable. Default: `RACK_REVISION`
+- `:default` - Sets revision value if env var or a file with revision does not exist. Default: `UNDEFINED`
 
 ## Example
 
@@ -86,4 +86,4 @@ rake test
 
 The MIT License
 
-Copyright (c) 2012-2020 Dan Sosedoff <dan.sosedoff@gmail.com>
+Copyright (c) 2012-2022 Dan Sosedoff <dan.sosedoff@gmail.com>
