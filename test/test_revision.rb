@@ -102,6 +102,23 @@ class TestRevision < Test::Unit::TestCase
     assert_equal "qwe123", last_response.headers["X-Revision"]
   end
 
+  def test_dir_does_not_exist
+    File.write("./test/tmp/REVISION", "example")
+
+    Dir.chdir("./test/tmp") do
+      self.app.reset_revision
+
+      get app_url
+      assert_equal "example", last_response.headers["X-Revision"]
+
+      FileUtils.rm_rf("../tmp")
+      self.app.reset_revision
+
+      get app_url
+      assert_equal "UNDEFINED", last_response.headers["X-Revision"]
+    end
+  end
+
   def test_env_is_present
     self.app.reset_revision
     get app_url

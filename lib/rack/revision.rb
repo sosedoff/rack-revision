@@ -9,6 +9,7 @@ module Rack
       initialize_options(options)
 
       @app = app
+      @dir = Dir.pwd
     end
 
     def call(env)
@@ -50,7 +51,7 @@ module Rack
     end
 
     def detected_filename
-      @file ||= (@options[:filename] =~ /\A\// ? @options[:filename] : File.join(Dir.pwd, @options[:filename]))
+      @file ||= (@options[:filename] =~ /\A\// ? @options[:filename] : File.join(@dir, @options[:filename]))
     end
 
     def initialize_options(options)
